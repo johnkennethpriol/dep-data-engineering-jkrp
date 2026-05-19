@@ -65,15 +65,9 @@ Full checklist: [docs/MILESTONE_CHECKLIST.md](docs/MILESTONE_CHECKLIST.md)
 
 ---
 
-## Tools Used
+## Tech Stack
 
-| Tool | Purpose |
-|------|---------|
-| Python (pandas, requests) | Data processing and ingestion |
-| GitHub + Git | Version control and portfolio |
-| Jupyter / VS Code | Development environment |
-| Plotly / Matplotlib | Visualization |
-| GitHub Pages + Actions | Deployment and CI/CD |
+![DEP Tech Stack](docs/stack-diagram.svg)
 
 ---
 
