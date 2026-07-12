@@ -1,65 +1,84 @@
-# NCR Air Quality and EV Fleet Growth: Measuring EVIDA's Impact (2014–Present)
+# Can Publicly Available Data Reveal Unusual Patterns in DPWH Flood Control Projects? (2022–2025)
 
 ## Problem Statement
 
-I want to answer: "Does early data after the Electric Vehicle Industry Development Act (EVIDA) in 2022 show any measurable change in NCR PM2.5 air quality and fleet composition trends, and is that change significant relative to the continued growth of the overall vehicle fleet?"
+I want to answer:
 
-My hypothesis is that EVIDA has had a positive but limited effect on air quality in the NCR. Any gains from cleaner vehicles are likely being offset by the simultaneous growth in total vehicle registrations, which means the net improvement in PM2.5 may not yet be statistically significant. If the data confirms this, the findings point to specific next actions: mandating Euro 5 emission standards for new vehicle registrations, setting binding EV fleet share targets per LGU, expanding EVIDA's charging infrastructure mandate, and introducing end-of-life vehicle policies to phase out the oldest and most polluting vehicles from the NCR fleet. If the data instead shows a meaningful improvement in PM2.5 alongside growing EV adoption, the findings would support accelerating EVIDA's implementation timeline, scaling up EV incentives, and using the NCR as a model for replication in other high-density regions in the country.
+**"Can publicly available DPWH flood control project data reveal unusual geographic, financial, and contractor-related patterns that may indicate areas requiring further audit or investigation between 2022 and 2025?"**
+
+My hypothesis is that while most flood control projects are distributed according to infrastructure and disaster mitigation needs, the data may reveal patterns that warrant closer examination. These may include unusually high concentrations of projects within specific provinces, repeated awards to the same contractors, or significant differences in project costs across comparable locations. Such patterns do **not** establish corruption, fraud, or wrongdoing. Instead, they provide evidence-based indicators that can help auditors, policymakers, journalists, and citizens identify projects that deserve further review. If the analysis finds no unusual concentrations or inconsistencies, it would suggest that the observed project distribution is generally consistent with available public data. If notable anomalies are identified, the findings could support stronger transparency initiatives, more detailed public reporting, and more targeted oversight by government auditing agencies.
 
 ## Audience
 
-This project is for national government agencies — specifically DOTr, DENR-EMB, and DOE — who need data-grounded evidence to evaluate whether EVIDA's current implementation pace is sufficient, and whether complementary policies are needed to achieve meaningful air quality improvements in the NCR. It is also relevant to the automotive industry for aligning product roadmaps with regulatory direction, and to businesses and LGUs planning supportive infrastructure for accelerated EV adoption.
+This project is intended for the Commission on Audit (COA), the Department of Public Works and Highways (DPWH), policymakers, local government units (LGUs), journalists, researchers, civil society organizations, and citizens interested in government transparency and infrastructure accountability. It aims to provide an objective, data-driven view of how publicly funded flood control projects are distributed across the Philippines.
 
 ## KPI or Key Metric
 
-The main metric I want to track is NCR annual average PM2.5 concentration (µg/m³), measured against the share of electric and hybrid vehicles as a percentage of total registered vehicles in the NCR per year.
+The primary metrics I want to track include:
+
+* Number of completed flood control projects per province and region
+* Total project cost by province and region
+* Average project cost
+* Number of projects awarded per contractor
+* Contractor concentration ratio
+* Geographic distribution of completed projects
+* Project density relative to province or municipality
+* Identification of statistical outliers in project allocation and cost
 
 ## Likely Data Source
 
-I will explore the following sources. Note that data coverage varies per source — vehicle fleet data currently runs to 2023 while air quality data extends to present via OpenAQ API:
+I will explore the following data sources:
 
-- DENR-EMB National Air Quality Status Reports (https://air.emb.gov.ph) — annual NCR PM2.5 averages, 2016–2021
-- DENR official press releases (https://denr.gov.ph) — NCR PM2.5 averages, 2022–2023
-- PSA Compendium of Philippine Environment Statistics, Table 5.8.1 (https://psa.gov.ph) — registered vehicles by fuel type, 2014–2023
-- DOE / EVAP Annual EV Industry Reports — EV and hybrid registration counts, 2022–2024
-- OpenAQ API (https://api.openaq.org/v3) — station-level PM2.5 readings from NCR EMB stations, 2023–present
+* DPWH Flood Control Projects Dataset (Kaggle) — https://www.kaggle.com/datasets/bwandowando/dpwh-flood-control-projects
+* DPWH Project DIME Dashboard — https://www.dime.gov.ph/dashboard
+* DPWH Official Website — https://www.dpwh.gov.ph
+* Commission on Audit (COA) Annual Audit Reports — https://www.coa.gov.ph
+* Philippine Statistics Authority (PSA) — https://psa.gov.ph (for regional and population statistics if normalization is required)
 
 ## Possible Final Dashboard
 
-The dashboard should help the audience quickly see whether NCR PM2.5 levels declined after EVIDA took effect in 2022, and whether the growth in EV and hybrid vehicle share is large enough to explain any observed change — or whether total fleet growth is canceling out the gains from cleaner vehicles.
+The dashboard should help users quickly identify how flood control projects are distributed across regions and provinces, which contractors receive the highest number of projects, how project costs compare geographically, and whether statistically unusual allocation patterns exist. Interactive maps, contractor rankings, regional summaries, and cost distribution charts will allow users to explore the data and identify projects or areas that may warrant further review by oversight agencies.
 
 ## Data Source Notes
 
-### Air Quality
+### Flood Control Projects
 
-**Primary:** OpenAQ API — NCR stations, Sept 2023–present
-- URL: https://api.openaq.org/v3
-- Format: JSON (REST API, requires X-API-Key header)
-- Coverage: Station-level PM2.5, NCR, Sept 2023–present (verified live)
-- Why it fits: Continuous, programmatic, station-level data covering the post-EVIDA period this project measures
-- Known limitations: Country-level filter (`countries_id=183`) returns stations outside NCR, requires additional geographic filtering; many stations have short or discontinuous coverage windows — only a subset (e.g. AirNow "Manila" station) provide continuous long-term data suitable for trend analysis
+**Primary:** DPWH Flood Control Projects Dataset (Kaggle)
 
-**Fallback:** DENR-EMB National Air Quality Status Reports — NCR PM2.5 baseline, 2016–2021
-- URL: https://air.emb.gov.ph
-- Format: PDF
-- Coverage: NCR annual PM2.5 averages, 2016–2021
-- Why it fits: Complementary earlier-period source, not a backup-if-fails source — establishes the pre-EVIDA baseline that OpenAQ doesn't cover, forming one continuous pre/post timeline with OpenAQ
-- Known limitations: PDF extraction required; annual granularity only, not station-level; no coverage for the 2022–mid-2023 transition period after EVIDA passed (April 2022) and before OpenAQ's NCR stations stabilize — DENR official press releases (2022–2023) may partially bridge this gap
+* URL: https://www.kaggle.com/datasets/bwandowando/dpwh-flood-control-projects
+* Format: CSV
+* Coverage: Completed DPWH flood control projects from July 2022 to May 2025
+* Why it fits: Provides structured project-level information including project names, locations, implementing offices, contractors, coordinates, and other metadata suitable for ETL and analytics.
+* Known limitations: Covers completed projects only and relies on publicly available government records compiled into a machine-readable dataset.
 
-### Vehicle Fleet Composition
+**Fallback:** DPWH Project DIME Dashboard
 
-**Primary:** PSA Compendium of Philippine Environment Statistics, Table 5.8.1
-- URL: https://psa.gov.ph
-- Format: Excel/PDF table
-- Coverage: Registered vehicles by fuel type, NCR, 2014–2023
-- Why it fits: Official government fleet registration data covering nearly the full study period
-- Known limitations: Stops at 2023, doesn't extend to "present"
+* URL: https://www.dime.gov.ph/dashboard
+* Format: Web dashboard / downloadable reports
+* Coverage: Government infrastructure project monitoring and implementation status
+* Why it fits: Can supplement project metadata and validate project information.
+* Known limitations: Coverage and available fields may differ from the Kaggle dataset and may require manual extraction.
 
-**Fallback:** DOE / EVAP Annual EV Industry Reports
-- Format: PDF/report
-- Coverage: EV and hybrid registration counts, 2022–2024
-- Why it fits: Extends fleet composition data one year closer to present than PSA alone
-- Known limitations: Narrower scope (EV/hybrid only, not full fleet breakdown)
+### Audit and Oversight Data
+
+**Primary:** Commission on Audit (COA) Annual Audit Reports
+
+* URL: https://www.coa.gov.ph
+* Format: PDF
+* Coverage: Audit findings and observations on government infrastructure projects
+* Why it fits: Provides additional context for interpreting observed data patterns.
+* Known limitations: Reports are document-based and require PDF extraction; audit observations may not correspond directly to every project in the dataset.
+
+### Geographic and Demographic Data
+
+**Primary:** Philippine Statistics Authority (PSA)
+
+* URL: https://psa.gov.ph
+* Format: CSV, Excel, PDF
+* Coverage: Population and regional statistics
+* Why it fits: Enables normalization of project counts and supports regional comparisons.
+* Known limitations: May require joining multiple datasets and harmonizing geographic identifiers.
 
 ### First Pull Path
-OpenAQ: API call via Python `requests`, authenticated with X-API-Key header, filtered by NCR station IDs. DENR-EMB and PSA: manual download of published PDF/Excel tables, parsed with `pdfplumber`/`pandas`.
+
+Download the Kaggle DPWH Flood Control Projects dataset as the primary source and ingest it into the Bronze layer. Clean and standardize project locations, contractor names, and administrative boundaries in the Silver layer. Enrich the data by joining regional information from PSA and validating selected projects against the DPWH Project DIME Dashboard. Finally, build Gold-layer analytical tables that summarize project distribution, contractor participation, regional investment patterns, and statistical outliers for visualization in an interactive dashboard.
