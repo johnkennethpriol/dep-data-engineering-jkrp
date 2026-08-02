@@ -63,3 +63,19 @@ The dashboard should help the audience quickly see whether NCR PM2.5 levels decl
 
 ### First Pull Path
 OpenAQ: API call via Python `requests`, authenticated with X-API-Key header, filtered by NCR station IDs. DENR-EMB and PSA: manual download of published PDF/Excel tables, parsed with `pdfplumber`/`pandas`.
+
+## How to Run
+
+1. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+2. Get a free API key from [OpenAQ](https://explore.openaq.org/register) and set it in a `.env` file at the repo root:
+   ```
+   OPENAQ_API_KEY=your_key_here
+   ```
+3. Run the ingestion script:
+   ```
+   python scripts/ingest.py
+   ```
+   This pulls raw PM2.5 measurements from the configured OpenAQ sensor and saves the untouched response to `data/raw/`.
