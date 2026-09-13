@@ -1,0 +1,18 @@
+Cleaning run: 2026-09-13T15:57:24.610407Z
+
+manila: loaded 18134 raw records from openaq_ncr_pm25_manila_2026-09-13.json
+ortigas: loaded 25053 raw records from openaq_ncr_pm25_ortigas_2026-09-13.json
+Unparseable timestamps: 0
+Null values: 0
+Negative values (physically impossible): 0
+Values above 500 µg/m³ (flagged as likely sensor fault): 0
+Duplicate (station, timestamp) pairs: 0
+
+Total raw records (both stations): 43187
+Total records dropped: 0
+Total records in cleaned dataset: 43187
+  of which flagged as likely sensor fault (kept, not dropped): 0
+  manila: 18134 records, 2023-09-06 21:00:00+00:00 to 2026-02-05 17:00:00+00:00
+  ortigas: 25053 records, 2024-08-13 03:00:59+00:00 to 2026-09-13 14:55:18+00:00
+
+Saved cleaned dataset to C:\Users\jkpri\dep-data-engineering-jkrp\data\processed\ncr_pm25_cleaned.csv
